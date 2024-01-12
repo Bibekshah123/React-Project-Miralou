@@ -11,9 +11,25 @@ import FooterImage from "../assets/icons/images/Footer.svg"
 import { ReactComponent as StarIcon } from "../assets/icons/star.svg"
 import { CategoryCard } from './categoryCard'
 
-export default function Home() {
+const Product = () =>{
+  
+  return <div className='w-60 mb-5'>
+    <div>
+      <img src={SerumImage} />
+    </div>
+    <div className='flex mt-2'>
+      <button> <StarIcon /> </button>
+      <p className='ml-1 text-sm mt-1'>1 review</p>
+    </div>
+    <div>
+      <p className='text-base font-bold'>Anti-Ance Serum</p>
+      <p className='text-base font-bold'>$ 4.99</p>
+    </div>
+  </div>
+}
 
-  const [data, setData] =useState()
+export default function Home() {
+  const [data, setData]= useState();
 
   useEffect(() => {
     const home_data = fetch("https://miralou-api.sagarlama.com/api/home").then((response) => {
@@ -21,12 +37,13 @@ export default function Home() {
     }).then((data) => {
       setData(data.data)
     })
-    .catch(() => {
+    .catch((e) =>{
       setData({
         categories: [],
         new_arrivals: [],
-      })
-    })
+      });
+    }
+    )
   }, [])
 
 
@@ -49,21 +66,7 @@ export default function Home() {
     },
   ]
 
-  const product = [
-    <div className='w-60 mb-5'>
-      <div>
-        <img src={SerumImage} />
-      </div>
-      <div className='flex mt-2'>
-        <button> <StarIcon /> </button>
-        <p className='ml-1 text-sm mt-1'>1 review</p>
-      </div>
-      <div>
-        <p className='text-base font-bold'>Anti-Ance Serum</p>
-        <p className='text-base font-bold'>$ 4.99</p>
-      </div>
-    </div>
-  ]
+  
 
   const About = [
     <div className='w-4/12'>
@@ -104,21 +107,27 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <div className='w-7/12 mx-auto mb-12'>
+        <div className='w-8/12 mx-auto mb-12'>
           <div>
             <h1 className='text-center font-medium font-serif text-5xl mx-auto mt-40 mb-5'>New Arrivals</h1>
             <p className='text-center text-xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a mi enim. Duis in tortor sit amet turpis rutrum fermentum
               in non arcu. Praesent porta auctor odio a suscipit. Quisque sagittis suscipit ultricies.</p>
           </div>
           <div className=' flex flex-wrap  justify-between  mt-5'>
+            {data?.new_arrivals.map((product) => {
+              return <Product product={product} />
+            })}
+            {data?.new_arrivals.map((product) => {
+              return <Product product={product} />
+            })}
+            {/* {product}
             {product}
             {product}
             {product}
             {product}
             {product}
             {product}
-            {product}
-            {product}
+            {product} */}
           </div>
           <div className='mt-10 mx-auto flex items-center justify-center'>
             <button className='rounded-md border-2 p-2 px-12 border-black'>
