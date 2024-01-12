@@ -3,9 +3,9 @@ export const CategoryCard = (props) => {
 
     return(
          <div className="relative flex justify-center">
-        <img src={category.img} alt={category.category} />
+        <img src={category.image} alt={category.category} />
         <div className="absolute z-10 bg-gray-300 py-4 px-14 -bottom-5 text-center">
-            {category.category}
+            {category.name}
         </div>
     </div>
     )

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar } from '../components/Navbar/Navbar'
 import HeroImage from "../assets/icons/images/hero 1.png"
 import WomenImage from "../assets/icons/images/Women.svg"
@@ -13,11 +13,19 @@ import { CategoryCard } from './categoryCard'
 
 export default function Home() {
 
+  const [data, setData] =useState()
+
   useEffect(() => {
     const home_data = fetch("https://miralou-api.sagarlama.com/api/home").then((response) => {
       return response.json();
     }).then((data) => {
-      console.log(data)
+      setData(data.data)
+    })
+    .catch(() => {
+      setData({
+        categories: [],
+        new_arrivals: [],
+      })
     })
   }, [])
 
@@ -89,7 +97,7 @@ export default function Home() {
       <section>
         <div className='conatiner mx-auto p-4 m-5 w-10/12'>
           <div className='flex flex-wrap justify-between'>
-            {categories.map((category) => (
+            {data?.categories.map((category) => (
               <CategoryCard category={category} />
             ))}
           </div>
