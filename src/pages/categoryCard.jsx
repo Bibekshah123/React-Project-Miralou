@@ -1,6 +1,5 @@
 export const CategoryCard = (props) => {
     const category = props.category;
-    console.log(category);
 
     return(
          <div className="relative flex justify-center">

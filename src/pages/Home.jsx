@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar } from '../components/Navbar/Navbar'
 import HeroImage from "../assets/icons/images/hero 1.png"
 import WomenImage from "../assets/icons/images/Women.svg"
@@ -12,6 +12,15 @@ import { ReactComponent as StarIcon } from "../assets/icons/star.svg"
 import { CategoryCard } from './categoryCard'
 
 export default function Home() {
+
+  useEffect(() => {
+    const home_data = fetch("https://miralou-api.sagarlama.com/api/home").then((response) => {
+      return response.json();
+    }).then((data) => {
+      console.log(data)
+    })
+  }, [])
+
 
   const categories = [
     {
